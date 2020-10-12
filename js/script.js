@@ -1,7 +1,8 @@
 const xhr = new XMLHttpRequest()
 const url = 'https://jsonplaceholder.typicode.com/users'
 
-xhr.open('GET', url)
+function User(){
+    xhr.open('GET', url)
 xhr.send()
 xhr.onload = function () {
    
@@ -10,8 +11,16 @@ xhr.onload = function () {
         Myfunction(obj)
     }
 }
-function Myfunction(object){
-    for(i=0;i<object.length;i++){
-        console.log(object[i]);
+}
+User()
+function Myfunction(obj){
+    for(i=0;i<obj.length;i++){
+        console.log(obj[i]);
     }
+    
+    const CardTite = document.querySelector('.card-title')
+    CardTite.innerHTML = obj[1].name
+    const CardSubtitle = document.querySelector('.card-subtitle')
+    
+    CardSubtitle.innerHTML = obj[2].username
 }

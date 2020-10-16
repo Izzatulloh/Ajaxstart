@@ -1,26 +1,30 @@
 const xhr = new XMLHttpRequest()
 const url = 'https://jsonplaceholder.typicode.com/users'
 
-function User(){
+function User() {
     xhr.open('GET', url)
-xhr.send()
-xhr.onload = function () {
-   
-    if (xhr.status == 200) {
-        let obj = JSON.parse(this.responseText)
-        Myfunction(obj)
+    xhr.send()
+    xhr.onload = function () {
+
+        if (xhr.status == 200) {
+            let response = JSON.parse(xhr.response)
+            Myfunction(response)
+        }
     }
-}
 }
 User()
-function Myfunction(obj){
-    for(i=0;i<obj.length;i++){
-        console.log(obj[i]);
+function Myfunction(response) {
+    
+    const CardTitle = document.querySelectorAll('.card-title')
+    const CardSubtitle = document.querySelectorAll('.card-subtitle') 
+    const CardBox = document.querySelectorAll('.card-text')
+    
+    for (i = 0; i < response.length; i++) {
+        console.log(response[i]);
+        let card = response[i]
+        CardTitle[i].innerHTML = card.name
+        CardSubtitle[i].innerHTML = card.username
+        CardBox[i].innerHTML = card.email
+
     }
-    
-    const CardTite = document.querySelector('.card-title')
-    CardTite.innerHTML = obj[1].name
-    const CardSubtitle = document.querySelector('.card-subtitle')
-    
-    CardSubtitle.innerHTML = obj[2].username
 }
